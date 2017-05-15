@@ -12,5 +12,5 @@ public class CreditRatingCal {
 	
 	public void calTheRatingOverTime(){
 		System.out.println("这是定时执行的任务");
-	}
+	}  
 }
