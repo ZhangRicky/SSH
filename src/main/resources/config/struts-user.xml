@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 
+		1，package的name属性区分名称，不重复即可
+		2，namespace指定一个访问命名空间：http://localhost:8080/SSH/user/userTest.action	，其中/user为命名空间	
+		
+		3，action中name为请求映射后缀，userTest对应的访问地址:http://localhost:8080/SSH/user/userTest.action
+		4，action中method属性指定请求对应的处理方法，不指定method属性默认执行excute()方法，
+	 -->
+	
+	<!-- 定义名为login的包，继承struts-default -->
+ 	<package name="userAction" namespace="/user" extends="struts-default">
+ 		<!-- http://localhost:8080/SSH/user/userTest.action ,action的name属性为userTest,不指定method属性默认为excute()方法-->
+		<action name="userTest" class="com.mark.action.UserAction">
+			<result name="error">/WEB-INF/views/error.jsp</result>
+			<result name="success">/WEB-INF/views/home.jsp</result>
+		</action>
+		
+		<!-- method属性用于指定执行action中指定方法 -->
+		<!-- http://localhost:8080/SSH/user/test.action -->
+		<action name="test"  class="com.mark.action.UserAction" method="test">
+			<result name="error">/WEB-INF/views/error.jsp</result>
+			<result name="success">/WEB-INF/views/home.jsp</result>
+		</action>
+    </package>
+	
+</struts>

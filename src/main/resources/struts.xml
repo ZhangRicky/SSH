@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+ <struts>
+ 	<!-- 指定由spring负责action对象的创建 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 更改struts2请求Action的后缀名，value默认为action。若想去掉后缀，设为","即可 -->
+	<constant name="struts.action.extension" value="action"></constant>
+ 	<!-- 文件上传最大不能超过200M -->
+	<constant name="struts.multipart.maxSize" value="209715200" />
+	<!-- 配置上传的临时目录路径 -->
+<!-- 	<constant name="struts.multipart.saveDir" value="D:\apache-tomcat-9.0.0.M15\temp"/> -->
+	<!-- 是否显示详细错误信息 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 指定struts国际化资源文件的baseName -->  
+    <constant name="struts.custom.i18n.resources" value="messageResource"/>  
+    <!-- 指定每次HTTP请求时是否重新加载国际化资源文件，默认为false,开发阶段设为true -->  
+    <constant name="struts.i18n.reload" value="false"/>  
+    <!-- 配置应用的编码方式 -->  
+    <constant name="struts.i18n.encoding" value="UTF-8"/>   
+	<!-- convention类重新加载 -->
+	<constant name="struts.convention.classes.reload" value="false" />
+	<!-- 浏览器是否缓存静态内容 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- spring 缓存机制 -->
+	<constant name="struts.objectFactory.spring.useClassCache" value="true"/>
+    <!-- struts2之前的版本动态方法调用默认是打开的，没想到2.3.15默认是关闭的, -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+ 	
+ 	    <package name="default" namespace="/" extends="json-default"> 
+    	<default-action-ref name="default-error" />
+    	<!-- 定义全局视图 -->    
+    	 <global-results><!-- 定义全局请求变量 -->  
+			<result name="login" type="redirect">/main.do</result> 
+			<result name="exit" type="redirect">/index.do</result><!-- 退出系统 -->
+            <result name="menuList" type="redirect">/left.do</result><!-- 用户菜单列表 -->
+    	 	<result name="error">/WEB-INF/jsp/inc/infoPopWin.jsp</result><!--操作错误弹窗提示返回 -->
+        	<result name="success">/WEB-INF/jsp/inc/infoPopWin.jsp</result><!--操作成功弹窗提示返回 --> 
+		    <result name="Error404">/WEB-INF/jsp/inc/err404.jsp</result><!--404错误 -->  
+		    <result name="Error500">/WEB-INF/jsp/inc/err500.jsp</result><!--500错误 --> 
+		    <result name="ErrorNullExcep">/WEB-INF/jsp/inc/errNullPointer.jsp</result><!--空指针错误--> 
+		    <result name="json" type="json"  >
+            	<param name="root">json</param>
+            </result>  <!--用于JSON数据返回-->
+		    
+    	</global-results>
+    	<!-- <global-exception-mappings>定义全局异常   
+    	 	<exception-mapping result="Error500" exception="java.lang.NullPointerException"/>空指针异常页面
+    		<exception-mapping result="ErrorNullExcep" exception="java.lang.Exception"/>出现异常时，将页面转到500这个错误页面  	
+    	</global-exception-mappings>  -->
+    	<action name="default-error"><result>/WEB-INF/jsp/inc/err500.jsp</result></action>
+        <action name="index"><result>/WEB-INF/index.jsp</result></action>
+        <action name="genValidateCode"><result>/WEB-INF/jsp/inc/GenValidateCode.jsp</result></action>
+        <!-- 定义主页面框架 -->
+		<action name="main"><result>/WEB-INF/main.jsp</result></action>
+		<action name="left"><result>/WEB-INF/left.jsp</result></action>
+		<action name="top"><result>/WEB-INF/top.jsp</result></action>
+		<action name="errWin"><result>/WEB-INF/jsp/inc/infoPopWin.jsp</result></action>
+ 	</package>
+ 	<!-- 导入其他映射的配置文件 -->
+	<include file="config/struts-user.xml"></include>
+ </struts>
