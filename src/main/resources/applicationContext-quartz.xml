@@ -58,6 +58,7 @@
     			<entry key="targetObject" value="creditRatingCal"></entry>
     			<entry key="targetMethod" value="calTheRatingOverTime"></entry>
     		</map>
+    		
     	</property>
     	<!-- 表示任务完成之后是否依然保留到数据库，默认false   -->
     	<property name="durability" value="true" />
